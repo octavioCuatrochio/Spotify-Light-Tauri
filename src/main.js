@@ -1,5 +1,6 @@
 const { invoke } = window.__TAURI__.tauri;
 
+
 let player;
 let img;
 let title;
@@ -20,6 +21,7 @@ window.addEventListener("DOMContentLoaded", () => {
   prev_btn = document.querySelector("#prev");
   next_btn = document.querySelector("#next");
   vol = document.querySelector("#vol");
+  console.log(window.__TAURI__.tauri);
 });
 
 window.onSpotifyWebPlaybackSDKReady = () => {

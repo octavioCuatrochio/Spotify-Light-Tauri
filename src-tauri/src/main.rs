@@ -15,7 +15,13 @@ fn main() {
     tauri::Builder
         ::default()
         .on_page_load(|window, payload| {
-            println!("{}", payload.url());
+            let url = String::from(payload.url());
+            let pos = url.find("#");
+
+            if pos != None {
+                window.emit("event-name", Payload { message: "Tauri is awesome!".into() }).unwrap();
+                println!("{}", payload.url());
+            }
         })
         .invoke_handler(tauri::generate_handler![greet])
         .run(tauri::generate_context!())
