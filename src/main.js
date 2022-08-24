@@ -24,7 +24,7 @@ window.addEventListener("DOMContentLoaded", () => {
 
 window.onSpotifyWebPlaybackSDKReady = () => {
   const token =
-"BQBAmh70KmSFdoISHWxZ5qGgo7tcysGk5TkApLc17LykgdD6Dgrf-TTusERHMqCaH6hSyY8_RlmMfcmIWUeDnLvDATmAEfTKYLlBoyO8Ni-cVJo1zxnoZfilRTArdoEjafKUMZT0A7ggt_UyzvGgYNOzVFpftcCCLjTRdE-f2kjT5syO1kq9BzjYre-tYQ12E5p4c9JdEBrygC0ESxpSGFA";
+    "BQBAmh70KmSFdoISHWxZ5qGgo7tcysGk5TkApLc17LykgdD6Dgrf-TTusERHMqCaH6hSyY8_RlmMfcmIWUeDnLvDATmAEfTKYLlBoyO8Ni-cVJo1zxnoZfilRTArdoEjafKUMZT0A7ggt_UyzvGgYNOzVFpftcCCLjTRdE-f2kjT5syO1kq9BzjYre-tYQ12E5p4c9JdEBrygC0ESxpSGFA";
   player = new Spotify.Player({
     name: "Spotify Light Player",
     getOAuthToken: (cb) => {
@@ -74,11 +74,11 @@ function updateUI(state) {
 
 async function changeVol(vol) {
   let f_vol;
-  
+
   if (vol < 100) {
     f_vol = vol / 100;
   } else f_vol = 1.0;
-  
+
   console.log(vol);
   console.log(f_vol);
 
@@ -97,7 +97,14 @@ async function nextTrack() {
   player.nextTrack();
 }
 
+function auth() {
+  window.location.replace(
+    `https://accounts.spotify.com/authorize?client_id=${"b2b436164711470c8ca1eef0b842f339"}&response_type=token&redirect_uri=${"https://tauri.localhost/"}&scope=${"app-remote-control"}&show_dialog=true`
+  );
+}
+
 window.prevTrack = prevTrack;
 window.nextTrack = nextTrack;
 window.play = play;
 window.changeVol = changeVol;
+window.auth = auth;
