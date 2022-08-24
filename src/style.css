@@ -1,0 +1,89 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+:root {
+  --main: #222831;
+  --secondary: #393e46;
+  --highlight: #00adb5;
+  --font: #eeeeee;
+  --green: #218839;
+  --red: #721c24;
+}
+
+.container {
+  width: 100%;
+  height: 100vh;
+  background-color: var(--main);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.song-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 30px;
+}
+
+.content {
+  width: 100%;
+  height: 100vh;
+  padding: 20px;
+}
+
+#song-img {
+  width: 200px;
+  height: 200px;
+  border-radius: 0.5rem;
+}
+
+#song-title {
+  margin-top: 2%;
+  font-family: "Roboto", sans-serif;
+  color: white;
+  text-align: center;
+}
+
+.controls {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+.controls-container {
+  display: flex;
+  margin-bottom: 15px;
+}
+
+#vol {
+  width: 100%;
+}
+
+.controls-container :nth-child(2) {
+  margin: 0 50px;
+}
+
+.controls-container button {
+  background-color: var(--secondary);
+  color: var(--font);
+  border: 1px solid var(--highlight);
+  border-radius: 0.5rem;
+  padding: 10px 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.controls-container button svg {
+  color: var(--font);
+  fill: var(--font);
+  width: 20px;
+}
