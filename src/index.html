@@ -5,7 +5,7 @@
     <link rel="stylesheet" href="style.css" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Tauri App</title>
-    <script src="https://sdk.scdn.co/spotify-player.js"></script>
+    <!-- <script src="https://sdk.scdn.co/spotify-player.js"></script> -->
     <script type="module" src="/main.js" defer></script>
   </head>
 
@@ -47,8 +47,15 @@
               </svg>
             </button>
           </div>
-          <input type="range" id="vol" name="vol" oninput="changeVol(this.value)" />
-          <button type="button" onclick="auth()">auth</button>
+          <input
+            type="range"
+            id="vol"
+            name="vol"
+            oninput="changeVol(this.value)"
+          />
+          <button type="button" id="auth" onclick="auth()">
+            Conectar reproductor
+          </button>
         </div>
       </div>
     </div>

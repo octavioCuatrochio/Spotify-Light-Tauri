@@ -16,15 +16,13 @@ fn main() {
             let pos = url.find("#");
 
             let window_ = window.clone();
-            let _id = window.listen("frontend-loaded", move |event| {
-                println!("got window event-name with payload {:?}", event.payload());
+            let _id = window.listen("frontend-loaded", move |_event| {
+                // println!("got window event-name with payload {:?}", event.payload());
 
                 if pos != None {
-                    println!("{}", payload.url());
+                    // println!("{}", payload.url());
                     window_.emit("get-token", Payload { url: payload.url().into() }).unwrap();
-                } else {
-                    println!("{}", "No es url valida");
-                }
+                } 
             });
         })
         // .invoke_handler(tauri::generate_handler![greet])

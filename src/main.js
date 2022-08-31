@@ -1,6 +1,7 @@
 const { invoke } = window.__TAURI__.tauri;
 const { once, emit, listen } = window.__TAURI__.event;
 
+console.log(window.__TAURI__.window);
 let player;
 let img;
 let title;
@@ -25,81 +26,60 @@ window.addEventListener("DOMContentLoaded", () => {
 
   setTimeout(() => {
     emit("frontend-loaded", { ready: true });
-  }, 500);
+  }, 250);
 
   once("get-token", async (event) => {
     token_g = getToken(event.payload.url);
-    console.log(token_g);
 
-    (async () => {
-      const { Player } = await waitForSpotifyWebPlaybackSDKToLoad();
-      console.log("The Web Playback SDK has loaded.");
+    let head = document.getElementsByTagName("head")[0];
 
-      player = new Player({
-        name: "Web Playback SDK",
-        volume: 1.0,
-        getOAuthToken: (callback) => {
-          callback(token_g);
+    let script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src = "https://sdk.scdn.co/spotify-player.js";
+    head.appendChild(script);
+
+    window.onSpotifyWebPlaybackSDKReady = () => {
+      player = new Spotify.Player({
+        name: "Spotify Light Player",
+        getOAuthToken: (cb) => {
+          cb(token_g);
         },
+        volume: 0.5,
       });
 
-      player.connect().then((connected) => {
-        if (connected) {
-          console.log("Connection was successful");
-        }
+      // Ready
+      player.addListener("ready", ({ device_id }) => {
+        console.log("Ready with Device ID", device_id);
       });
-    })();
+
+      // Not Ready
+      player.addListener("not_ready", ({ device_id }) => {
+        console.log("Device ID has gone offline", device_id);
+      });
+
+      player.addListener("initialization_error", ({ message }) => {
+        console.error(message);
+      });
+
+      player.addListener("authentication_error", ({ message }) => {
+        console.error(message);
+      });
+
+      player.addListener("account_error", ({ message }) => {
+        console.error(message);
+      });
+
+      player.addListener("player_state_changed", (state) => {
+        updateUI(state);
+      });
+      player.connect();
+
+      document.querySelector("#auth").remove();
+      document.querySelector(".song-info").style.marginBottom = "50px";
+      document.querySelector("#song-title").style.height = "25px";
+    };
   });
 });
-
-async function waitForSpotifyWebPlaybackSDKToLoad() {
-  return new Promise((resolve) => {
-    if (window.Spotify) {
-      resolve(window.Spotify);
-    } else {
-      window.onSpotifyWebPlaybackSDKReady = () => {
-        resolve(window.Spotify);
-      };
-    }
-  });
-}
-
-// window.onSpotifyWebPlaybackSDKReady = () => {
-//   player = new Spotify.Player({
-//     name: "Spotify Light Player",
-//     getOAuthToken: (cb) => {
-//       cb(token_g);
-//     },
-//     volume: 0.5,
-//   });
-
-//   // Ready
-//   player.addListener("ready", ({ device_id }) => {
-//     console.log("Ready with Device ID", device_id);
-//   });
-
-//   // Not Ready
-//   player.addListener("not_ready", ({ device_id }) => {
-//     console.log("Device ID has gone offline", device_id);
-//   });
-
-//   player.addListener("initialization_error", ({ message }) => {
-//     console.error(message);
-//   });
-
-//   player.addListener("authentication_error", ({ message }) => {
-//     console.error(message);
-//   });
-
-//   player.addListener("account_error", ({ message }) => {
-//     console.error(message);
-//   });
-
-//   player.addListener("player_state_changed", (state) => {
-//     updateUI(state);
-//   });
-//   player.connect();
-// };
 
 function getToken(url) {
   let search = "token=";
@@ -141,10 +121,6 @@ async function changeVol(vol) {
   player.setVolume(f_vol);
 }
 
-once("event-name", async (event) => {
-  console.log(event);
-});
-
 async function play() {
   player.togglePlay();
 }
@@ -159,7 +135,7 @@ async function nextTrack() {
 
 function auth() {
   window.location.replace(
-    `https://accounts.spotify.com/authorize?client_id=${"b2b436164711470c8ca1eef0b842f339"}&response_type=token&redirect_uri=${"https://tauri.localhost/"}&scope=${"app-remote-control"}&show_dialog=true`
+    `https://accounts.spotify.com/authorize?client_id=${"b2b436164711470c8ca1eef0b842f339"}&response_type=token&redirect_uri=${"https://tauri.localhost/"}&scope=${"app-remote-control streaming"}&show_dialog=true`
   );
 }
 
