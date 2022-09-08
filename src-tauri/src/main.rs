@@ -20,7 +20,7 @@ fn main() {
                 // println!("got window event-name with payload {:?}", event.payload());
 
                 if pos != None {
-                    // println!("{}", payload.url());
+                    println!("{}", payload.url());
                     window_.emit("get-token", Payload { url: payload.url().into() }).unwrap();
                 } 
             });

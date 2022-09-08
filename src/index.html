@@ -8,13 +8,31 @@
     <!-- <script src="https://sdk.scdn.co/spotify-player.js"></script> -->
     <script type="module" src="/main.js" defer></script>
   </head>
-
+  <div data-tauri-drag-region id="titlebar">
+    <h2>Light Player</h2>
+    <div class="titlebar_controls">
+      <button id="minimize">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+          <path
+            d="M473 7c-9.4-9.4-24.6-9.4-33.9 0l-87 87L313 55c-6.9-6.9-17.2-8.9-26.2-5.2S272 62.3 272 72V216c0 13.3 10.7 24 24 24H440c9.7 0 18.5-5.8 22.2-14.8s1.7-19.3-5.2-26.2l-39-39 87-87c9.4-9.4 9.4-24.6 0-33.9L473 7zM216 272H72c-9.7 0-18.5 5.8-22.2 14.8s-1.7 19.3 5.2 26.2l39 39L7 439c-9.4 9.4-9.4 24.6 0 33.9l32 32c9.4 9.4 24.6 9.4 33.9 0l87-87 39 39c6.9 6.9 17.2 8.9 26.2 5.2s14.8-12.5 14.8-22.2V296c0-13.3-10.7-24-24-24z"
+          />
+        </svg>
+      </button>
+      <button id="close">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+          <path
+            d="M175 175C184.4 165.7 199.6 165.7 208.1 175L255.1 222.1L303 175C312.4 165.7 327.6 165.7 336.1 175C346.3 184.4 346.3 199.6 336.1 208.1L289.9 255.1L336.1 303C346.3 312.4 346.3 327.6 336.1 336.1C327.6 346.3 312.4 346.3 303 336.1L255.1 289.9L208.1 336.1C199.6 346.3 184.4 346.3 175 336.1C165.7 327.6 165.7 312.4 175 303L222.1 255.1L175 208.1C165.7 199.6 165.7 184.4 175 175V175zM512 256C512 397.4 397.4 512 256 512C114.6 512 0 397.4 0 256C0 114.6 114.6 0 256 0C397.4 0 512 114.6 512 256zM256 48C141.1 48 48 141.1 48 256C48 370.9 141.1 464 256 464C370.9 464 464 370.9 464 256C464 141.1 370.9 48 256 48z"
+          />
+        </svg>
+      </button>
+    </div>
+  </div>
   <body>
     <div class="container">
       <div class="content">
         <div class="song-info">
           <img
-            src="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/11d65267-4764-42ee-a21c-ab753272b1fc/d8bmoq2-eb0c300d-39bb-4f3e-a705-f5f96f349fb9.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcLzExZDY1MjY3LTQ3NjQtNDJlZS1hMjFjLWFiNzUzMjcyYjFmY1wvZDhibW9xMi1lYjBjMzAwZC0zOWJiLTRmM2UtYTcwNS1mNWY5NmYzNDlmYjkucG5nIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.50iRXAlK0S6d4K6h8yXnG4_oIGr6pHTvWoMUwCRXMpE"
+            src="https://f4.bcbits.com/img/a1322149552_10.jpg"
             id="song-img"
           />
           <h2 id="song-title"></h2>

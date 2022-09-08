@@ -5,6 +5,13 @@
   padding: 0;
   box-sizing: border-box;
   overflow: hidden;
+
+  -webkit-touch-callout: none; /* iOS Safari */
+  -webkit-user-select: none; /* Safari */
+  -khtml-user-select: none; /* Konqueror HTML */
+  -moz-user-select: none; /* Old versions of Firefox */
+  -ms-user-select: none; /* Internet Explorer/Edge */
+  user-select: none;
 }
 
 :root {
@@ -39,8 +46,8 @@
 }
 
 #song-img {
-  width: 200px;
-  height: 200px;
+  width: 150px;
+  height: 150px;
   border-radius: 0.5rem;
 }
 
@@ -87,9 +94,58 @@
 .controls-container button svg {
   color: var(--font);
   fill: var(--font);
-  width: 20px;
+  width: 15px;
 }
 
 #auth {
   margin-top: 15px;
+}
+
+#titlebar {
+  height: 30px;
+  width: 100%;
+  /* background-color: red; */
+  background-color: var(--main);
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+#titlebar h2 {
+  font-family: "Roboto", sans-serif;
+  margin-left: 10px;
+  margin-top: 10px;
+  font-weight: 100;
+  font-size: 0.8rem;
+}
+
+.titlebar_controls button svg {
+  width: 15px;
+  color: white;
+  fill: white;
+}
+
+.titlebar_controls {
+  display: flex;
+}
+
+.titlebar_controls button {
+  background-color: transparent;
+  border: none;
+  height: 30px;
+  width: 45px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#minimize:hover {
+  transition: all ease-in 0.25s;
+  background-color: var(--highlight);
+}
+
+#close:hover {
+  transition: all ease-in 0.25s;
+  background-color: #e81123;
 }
